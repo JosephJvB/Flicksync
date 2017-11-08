@@ -68,22 +68,22 @@ class Dictaphone extends Component {
       return null
     }
     return <div>
-        <button className="button" onClick={startListening}>
+      <button className="button" onClick={startListening}>
           Speak
-        </button>
-        <button className="button" onClick={this.compareText.bind(null, stopListening, transcript)}>
+      </button>
+      <button className="button" onClick={this.compareText.bind(null, stopListening, transcript)}>
           Stop/Submit
-        </button>
-        <br />
-        <input type="text" value={transcript} id="speech-field" />
-        {playerScores.length > 0 && <p>
+      </button>
+      <br />
+      <input type="text" value={transcript} id="speech-field" />
+      {playerScores.length > 0 && <p>
             Score: {playerScores[playerScores.length - 1].score}
-          </p>}
-        <br />
-        {this.state.continueIsVisible && <button id="next" className="button is-large is-danger" onClick={() => this.submit(resetTranscript, stopListening)}>
+      </p>}
+      <br />
+      {this.state.continueIsVisible && <button id="next" className="button is-large is-danger" onClick={() => this.submit(resetTranscript, stopListening)}>
             Continue
-          </button>}
-      </div>;
+      </button>}
+    </div>
   }
 }
 

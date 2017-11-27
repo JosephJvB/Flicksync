@@ -72,11 +72,9 @@ class Dictaphone extends Component {
 
   reworking (points) { // used for minusing points, but not reaching below 0
     if (points < 0) {
-      let reworkedPoints = 1 // 1 point (because they still got something right)
-      return reworkedPoints
+      return 1
     } else {
-      let reworkedPoints = points
-      return reworkedPoints
+      return points
     }
   }
   componentWillReceiveProps ({ finalTranscript, randomVid, dispatch, round }) {
@@ -109,39 +107,33 @@ class Dictaphone extends Component {
   }
 
   compareFinalTranscript (finalTranscript) {
+    console.log(finalTranscript)
     const { randomVid, dispatch, round } = this.props
     var points = 0
     var actual = randomVid.quote
     const actualArr = actual.toLowerCase().split(' ')
     let transArr = finalTranscript.toLowerCase().split(' ')
-    console.log('quote from database = ', actual)
-    console.log('finalTranscript = ' + finalTranscript) // look at final transcript
+
     transArr.forEach((char, idx, transcriptArr) => {
       if (actualArr.find(actualChar => actualChar === char)) points++
     })
     if (finalTranscript.toLowerCase() === actual.toLowerCase()) {
-      console.log('Correct, double points!')
       points = 20 // maybe just keep as 10, without double points
-      console.log('points: ' + points)
+
       dispatch(setPlayerScores(points, round.currentPlayer))
       this.checkScore(points)
-      return points
     } else if (transArr.length > actualArr.length) {
       let adjustedPoints = (points - (transArr.length - actualArr.length))
       let percentagePoints = Math.round((adjustedPoints / actualArr.length) * 10)
       points = this.reworking(percentagePoints)
-      console.log('Ooh, additional words will lose you points')
-      console.log('points: ' + points)
+
       dispatch(setPlayerScores(points, round.currentPlayer))
       this.checkScore(points)
-      return points
     } else {
-      console.log('Not quite...')
       points = Math.round((points / actualArr.length) * 10)
-      console.log('points: ' + points)
+
       dispatch(setPlayerScores(points, round.currentPlayer))
       this.checkScore(points)
-      return points
     }
   }
 

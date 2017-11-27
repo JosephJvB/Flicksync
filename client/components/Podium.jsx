@@ -33,7 +33,7 @@ class Podium extends React.Component {
       display: 'block'
     }
 
-    return <div className="backdrop" style={backdropStyle}>
+    return <div className="backdrop" style={backdropStyle} >
       <Sound url="/sounds/fox.mp3" playStatus={Sound.status.PLAYING} />
       <div className="modal" style={modalStyle}>
         {this.props.children}
